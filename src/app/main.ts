@@ -10,19 +10,32 @@ export class Main {
 
   result: string;
   regex: string;
+  text: string;
 
   constructor() {
   }
 
   onTextAreaChange(value: string) {
-    if (value != null && value.length > 0) {
-      var r = new RegExp(this.regex);
-      this.result = value.replace(r, str => `<span>${str}</span>`);
+    this.text = value;
+    if (this.text != null && this.text.length > 0) {
+      var regexp = eval(this.regex);
+      this.result = this.text.replace(regexp, str => `<span>${str}</span>`);
     }
   }
 
   onRegexChange(regex: string) {
     this.regex = regex;
+    var isValid = true;
+    try {
+      eval(this.regex);
+    } catch(e) {
+      isValid = false;
+      console.log('Invalid reg expression');
+    }
+    if (isValid==true && this.text != null) {
+      var regexp = eval(this.regex);
+      this.result = this.text.replace(regexp, str => `<span>${str}</span>`);
+    }
   }
 
   ngOnInit(){

@@ -1,44 +1,16 @@
 import {Component} from 'angular2/core';
+import {CandidateText} from './components/candidate-text/candidate-text';
+import {RegexInput} from './components/regex-input/regex-input';
+import {RegexResult} from './components/regex-result/regex-result';
 
 @Component({
   selector: 'main',
-  providers: [],
-  templateUrl: 'app/main.html',
-  pipes: []
+  template: `<h3>JavaScript Regular Expressions</h3>
+            <candidate-text (update)="textContent = $event"></candidate-text>
+            <regex-input (update)="regex = $event"></regex-input>
+            <regex-result [textContent]="textContent" [regex]="regex"></regex-result>`,
+  directives: [CandidateText, RegexInput, RegexResult]
 })
 export class Main {
 
-  result: string;
-  regex: string;
-  text: string;
-
-  constructor() {
-  }
-
-  onTextAreaChange(value: string) {
-    this.text = value;
-    if (this.text != null && this.text.length > 0) {
-      var regexp = eval(this.regex);
-      this.result = this.text.replace(regexp, str => `<span>${str}</span>`);
-    }
-  }
-
-  onRegexChange(regex: string) {
-    this.regex = regex;
-    var isValid = true;
-    try {
-      eval(this.regex);
-    } catch(e) {
-      isValid = false;
-      console.log('Invalid reg expression');
-    }
-    if (isValid==true && this.text != null) {
-      var regexp = eval(this.regex);
-      this.result = this.text.replace(regexp, str => `<span>${str}</span>`);
-    }
-  }
-
-  ngOnInit(){
-    this.result = "";
-  }
 }

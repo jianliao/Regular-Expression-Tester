@@ -10,6 +10,8 @@ module.exports = {
     path: "./dist",
     filename: "bundle.js"
   },
+  // Turn on sourcemaps
+  devtool: 'source-map',
   plugins: [
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
   ],

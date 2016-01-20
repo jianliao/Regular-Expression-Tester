@@ -1,4 +1,4 @@
-## angular2-seed
+## Regular Expression Tester
 
 A simple starter project demonstrating the basic concepts of Angular2.
 
